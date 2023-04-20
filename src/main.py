@@ -22,15 +22,14 @@ def is_valid_imo(imo: str) -> bool:
         DESCRIPTION.
 
     """
-    check_sum = sum(
-        [
-            _ * int(num) for _, num in enumerate(imo[::-1], start=1) if _ != 1
-        ]
-    )
-    return check_sum % 10 == int(imo[-1])
+    return sum(
+        map(lambda _: _[0] * int(_[1]), enumerate(imo[::-1][1:], start=2))
+    ) % 10 == int(imo[-1])
 
 
 if __name__ == '__main__':
-    imo = "9000003"
+    imo = ""
+    while len(imo) != 7:
+        imo = input("Input IMO, 7-Digit Number, Like 9000003: ")
 
     print(is_valid_imo(imo))
